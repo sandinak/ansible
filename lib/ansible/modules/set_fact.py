@@ -71,6 +71,7 @@ notes:
       Using the setting will restrict k=v to strings, but will allow you to specify string or boolean in YAML.
     - "To create lists/arrays or dictionary/hashes use YAML notation C(var: [val1, val2])."
     - Since 'cacheable' is now a module param, 'cacheable' is no longer a valid fact name.
+    - set_fact can assign variables to other hosts in the inventory using "delegate_to: {target_host}" with "delegate_facts: true"/
 seealso:
 - module: ansible.builtin.include_vars
 - ref: ansible_variable_precedence
@@ -116,4 +117,10 @@ EXAMPLES = r'''
   ansible.builtin.set_fact:
     two_dict: {'something': here2, 'other': somewhere}
     two_list: [1,2,3]
+
+- name: assigning a fact to another host in inventory
+  delegate_to: target_host
+  delegate_facts: true
+  ansible.builtin.set_fact: 
+    fact_for_host: true
 '''
